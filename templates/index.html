@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rainfall Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            margin: 0; padding: 0;
+            background: linear-gradient(to right, #4e73df, #1cc88a);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            width: 90%; max-width: 980px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        h1 { text-align: center; margin-bottom: 20px; color: #4e73df; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        label { font-size: 14px; font-weight: 600; }
+        input, select {
+            width: 100%;
+            padding: 8px 10px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            background: white;
+        }
+        input:focus, select:focus { outline: none; border-color: #4e73df; }
+        .btn {
+            margin-top: 25px;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(to right, #36b9cc, #1cc88a);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .footer { text-align: center; margin-top: 15px; font-size: 13px; color: gray; }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>🌧 Rainfall Prediction System</h1>
+
+    <form action="/predict" method="POST">
+        <div class="grid">
+
+            <div>
+                <label>Location</label>
+                <select name="Location" required>
+                    <option value="">Select Location</option>
+                    <option>Albury</option><option>BadgerysCreek</option><option>Cobar</option><option>CoffsHarbour</option>
+                    <option>Moree</option><option>Newcastle</option><option>NorahHead</option><option>NorfolkIsland</option>
+                    <option>Penrith</option><option>Richmond</option><option>Sydney</option><option>SydneyAirport</option>
+                    <option>WaggaWagga</option><option>Williamtown</option><option>Wollongong</option>
+                    <option>Canberra</option><option>Tuggeranong</option><option>MountGinini</option>
+                    <option>Ballarat</option><option>Bendigo</option><option>Sale</option><option>MelbourneAirport</option>
+                    <option>Melbourne</option><option>Mildura</option><option>Nhil</option><option>Portland</option>
+                    <option>Watsonia</option><option>Dartmoor</option>
+                    <option>Brisbane</option><option>Cairns</option><option>GoldCoast</option><option>Townsville</option>
+                    <option>Adelaide</option><option>MountGambier</option><option>Nuriootpa</option><option>Woomera</option>
+                    <option>Albany</option><option>Witchcliffe</option><option>PearceRAAF</option><option>PerthAirport</option>
+                    <option>Perth</option><option>SalmonGums</option><option>Walpole</option>
+                    <option>Hobart</option><option>Launceston</option><option>AliceSprings</option><option>Darwin</option><option>Katherine</option><option>Uluru</option>
+                </select>
+            </div>
+
+            <div><label>Min Temp (°C)</label><input name="MinTemp" type="number" step="0.1" required></div>
+            <div><label>Max Temp (°C)</label><input name="MaxTemp" type="number" step="0.1" required></div>
+
+            <div><label>Rainfall (mm)</label><input name="Rainfall" type="number" step="0.1" required></div>
+            <div><label>Wind Gust Speed</label><input name="WindGustSpeed" type="number" required></div>
+            <div><label>Humidity 9AM</label><input name="Humidity9am" type="number" required></div>
+
+            <div><label>Wind Speed 9AM</label><input name="WindSpeed9am" type="number" required></div>
+            <div><label>Wind Speed 3PM</label><input name="WindSpeed3pm" type="number" required></div>
+            <div><label>Humidity 3PM</label><input name="Humidity3pm" type="number" required></div>
+
+            <div><label>Pressure 9AM</label><input name="Pressure9am" type="number" required></div>
+            <div><label>Pressure 3PM</label><input name="Pressure3pm" type="number" required></div>
+            <div><label>Temp 9AM</label><input name="Temp9am" type="number" required></div>
+
+            <div><label>Temp 3PM</label><input name="Temp3pm" type="number" required></div>
+
+            <div>
+                <label>Rain Today</label>
+                <select name="RainToday" required>
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            </div>
+
+            <!-- Wind direction dropdown -->
+            <div>
+                <label>Wind Gust Direction</label>
+                <select name="WindGustDir" required>
+                    <option value="">Select</option>
+                    <option>N</option><option>NNE</option><option>NE</option><option>ENE</option>
+                    <option>E</option><option>ESE</option><option>SE</option><option>SSE</option>
+                    <option>S</option><option>SSW</option><option>SW</option><option>WSW</option>
+                    <option>W</option><option>WNW</option><option>NW</option><option>NNW</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Wind Dir 9AM</label>
+                <select name="WindDir9am" required>
+                    <option value="">Select</option>
+                    <option>N</option><option>NNE</option><option>NE</option><option>ENE</option>
+                    <option>E</option><option>ESE</option><option>SE</option><option>SSE</option>
+                    <option>S</option><option>SSW</option><option>SW</option><option>WSW</option>
+                    <option>W</option><option>WNW</option><option>NW</option><option>NNW</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Wind Dir 3PM</label>
+                <select name="WindDir3pm" required>
+                    <option value="">Select</option>
+                    <option>N</option><option>NNE</option><option>NE</option><option>ENE</option>
+                    <option>E</option><option>ESE</option><option>SE</option><option>SSE</option>
+                    <option>S</option><option>SSW</option><option>SW</option><option>WSW</option>
+                    <option>W</option><option>WNW</option><option>NW</option><option>NNW</option>
+                </select>
+            </div>
+
+           
+
+        </div>
+
+        <button class="btn" type="submit">Predict Rainfall</button>
+    </form>
+
+    <div class="footer">
+        Machine Learning | Flask Deployment | RainTomorrow Prediction
+    </div>
+</div>
+</body>
+</html>

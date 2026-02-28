@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rain Prediction Result</title>
+    <style>
+        body {
+            margin:0;
+            font-family:Segoe UI;
+            background: linear-gradient(to right, #1cc88a, #36b9cc);
+            display:flex; justify-content:center; align-items:center;
+            height:100vh; color:white;
+        }
+        .box {
+            background:white;
+            color:#1cc88a;
+            padding:40px;
+            border-radius:18px;
+            text-align:center;
+            width:420px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.25);
+        }
+        .prob { font-size:28px; font-weight:700; margin:10px 0; }
+        .dates { color:#333; font-size:14px; margin-top:15px; }
+        a {
+            display:inline-block; margin-top:18px;
+            text-decoration:none; background:#1cc88a; color:white;
+            padding:10px 18px; border-radius:10px; font-weight:600;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <h1>🌧 Rain Expected!</h1>
+    <div class="prob">Chance: {{ prob }}%</div>
+
+    <div class="dates">
+        <p><b>Input Date (Today):</b> {{ input_date }}</p>
+        <p><b>Prediction For (Tomorrow):</b> {{ predicted_date }}</p>
+    </div>
+
+    <a href="/">Predict Again</a>
+</div>
+</body>
+</html>
